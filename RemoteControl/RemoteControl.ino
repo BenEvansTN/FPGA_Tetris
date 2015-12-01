@@ -1,5 +1,6 @@
 /* 
   RemoteControl.ino  
+  Author: Ben Evans 
   
   While loaded with this file, the Arduino Esplora will 
   perform the following functions: 
@@ -10,7 +11,6 @@
   - While SWITCH_4 pressed, output HIGH to PIN1 
   - ELSE, output LOW to all above pins 
   
-  Author: Ben Evans 
 */ 
 
 #include <Esplora.h> 
