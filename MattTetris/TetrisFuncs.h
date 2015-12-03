@@ -1,51 +1,11 @@
-/* 
- *  
- */
- 
-// -----INCLUDES ----- 
+#ifndef TetrisFuncs_h
+#define TetrisFuncs_h
+
 #include <Adafruit_GFX.h>   // Core graphics library 
 #include <RGBmatrixPanel.h> // Hardware-specific library 
 
-// ----- PREPROCESSOR DEFS ----- 
-#define CLK 11
-#define LAT A3
-#define OE 9
-#define A A0
-#define B A1
-#define C A2
-#define F2(progmem_ptr) (const __FlashStringHelper *)progmem_ptr
-#define XSIZE 33
-#define YSIZE 17
-
-// ----- INIT VARS ----- 
-int m=0;
-int UpBtn = 53; 
-int DnBtn = 47; 
-int LfBtn = 43; 
-int RtBtn = 37; 
-int cordX = 0; 
-int cordY = 5; 
-int oldX = 0; 
-int oldY = 15; 
-int dlytm = 50;   // Amount of delay (in ms) to debounce on button presses 
-int xcol;
-int XmaxN=31;
-int XmaxO=32;
-int r;
-int g;
-int b;
-int blockheight;
-int blockSelect=2;
-int DeleteSelect=2;
-int heightSelect=2;
-
 RGBmatrixPanel matrix(A, B, C, CLK, LAT, OE, false);
-// ^ last parameter = 'false' disable double-buffering
 
-
-// ------------------------------ 
-// ---------- FUNCTIONS ----------
-// ------------------------------ 
 
 void StartScreen()
 {
@@ -247,8 +207,6 @@ void CallHeight(int heightSelect)
   }
 }
 
-boolean bufferBoard[XSIZE+2][YSIZE+2];//Creates array with a DEAD cell border
-boolean board[XSIZE+2][YSIZE+2];
 
 void printBoard()
 { //Draws pixels on LED board
@@ -261,77 +219,4 @@ void printBoard()
 }
 
 
-// ------------------------------ 
-// ---------- SETUP ----------
-// ------------------------------ 
-void setup() 
-{
- 
-  matrix.begin(); 
-  //StartScreen();
-  //matrix.drawPixel(cordX,cordY,matrix.Color333(0,255,0)); 
-  //BlockShapeL1();
-  //BlockShapeSquare();
-  //BlockShapePlank();
-
-  //
-  //  delay(100);
-  //  matrix.fillScreen(0);
-  //  matrix.setCursor(10,1);
-  //  matrix.setTextColor(matrix.Color333(0,0,204));
-  //  matrix.print('G');
-  //  matrix.setTextColor(matrix.Color333(255,255,0)); 
-  //  matrix.print('O');
-  //  
-  //  matrix.setCursor(2,8);
-  //  matrix.setTextColor(matrix.Color333(0,0,204));
-  //  matrix.print('M');
-  //  matrix.setTextColor(matrix.Color333(255,255,0)); 
-  //  matrix.print('O');
-  //  matrix.setTextColor(matrix.Color333(0,0,204));  
-  //  matrix.print('C');
-  //  matrix.setTextColor(matrix.Color333(255,255,0));
-  //  matrix.print('S');
-  //  matrix.setTextColor(matrix.Color333(0,0,204)); 
-  //  matrix.print('!');
-  //  delay(1000);
-  //  matrix.fillScreen(0);
-  //  delay(500);
-}
-
-
-// ------------------------------ 
-// ---------- STRT MAIN ----------
-// ------------------------------ 
-void loop() 
-{
-  CallBlock(blockSelect);
-  CallDelete(DeleteSelect);
-  CallHeight(heightSelect);
-  BlockShapeL1(10,9,3,7,7,7);
-  //BlockShapeSquare(cordY,cordX,0,7,0);
-  //BlockShapeSquare(cordY-2,cordX,0,0,0);
-  if(cordX != XmaxO)
-  {
-    cordX=cordX+1;
-  }
-  if(cordX==XmaxO)
-  {
-    XmaxN=XmaxO-blockheight;
-    XmaxO=XmaxN;
-    blockSelect=random(1,3);
-    DeleteSelect=blockSelect;
-    heightSelect=blockSelect;
-    cordX=0;
-  }
-  if(XmaxN<-1)
-  {
-    matrix.fillScreen(0);
-    StartScreen();
-    delay(5000);
-  }
-  
-  delay(100);
-}
-
-
+#endif
