@@ -1,0 +1,38 @@
+/* 
+
+   Comments
+   Comments 
+   Comments 
+
+*/ 
+
+#include 
+#include 
+... 
+
+#define 
+#define 
+#define 
+... 
+
+void setup()
+{
+
+}
+
+int main()
+{
+   define frame strt_scrn; 
+   print(strt_scrn); 
+   
+   while( !BTN1 || !BTN2 || !BTN3 || !BTN4 )
+   {
+      //  Each btn is LOW if not pushed 
+      //  Soon as any one btn is pushed, will exit this loop 
+   } 
+   
+   // # # # # # # # # # # # # # # # # # # # # 
+   
+   
+}
+
